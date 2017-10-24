@@ -1,0 +1,10 @@
+/*.log
+/target
+/*-init.clj
+/resources/public/js
+out
+
+/demo/js/*/*
+!demo/js/app.js
+
+*.*~
