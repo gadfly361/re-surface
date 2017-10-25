@@ -150,7 +150,7 @@
                      :top -24}
    :navbar           {:key    :surface-17-navbar
                       :height 100
-                      :fixed? false}
+                      :fixed? true}
    :navbar-dropdown {:key     :surface-17-navbar-dropdown
                      :active? false
                      :top     -24}

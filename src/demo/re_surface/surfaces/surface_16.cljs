@@ -131,7 +131,7 @@
                      :top -24}
    :navbar           {:key    :default
                       :height 80
-                      :fixed? false}
+                      :fixed? true}
    :body             {:key :surface-16-body}
    :footer           {:key    :default
                       :height 100
