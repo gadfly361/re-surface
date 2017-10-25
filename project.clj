@@ -1,4 +1,4 @@
-(defproject re-surface "0.1.0-alpha"
+(defproject re-surface "0.1.0-alpha2"
   :description "This library is an attempt to provide structure to a reagent application at the page level."
   :url "https://github.com/gadfly361/re-surface"
   :license {:name "MIT"}
