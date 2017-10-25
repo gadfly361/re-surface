@@ -50,6 +50,17 @@
              :opt-un [::fixed?
                       ::background-color]))
 
+(spec/def ::navbar-dropdown
+  (spec/keys :req-un [::key]
+             :opt-un [::active?
+                      ::background-color
+                      ::height
+                      ::width
+                      ::top
+                      ::left
+                      ::bottom
+                      ::right]))
+
 (spec/def ::body
   (spec/keys :req-un [::key]
              :opt-un [::background-color]))
@@ -100,6 +111,7 @@
   (spec/keys :opt-un [::header
                       ::header-dropdown
                       ::navbar
+                      ::navbar-dropdown
                       ::body
                       ::footer
                       ::sidebar-left
@@ -147,6 +159,7 @@
         {:keys [header
                 header-dropdown
                 navbar
+                navbar-dropdown
                 body
                 footer
 
@@ -175,6 +188,10 @@
         navbar-fixed? (get navbar :fixed?)
         navbar-key    (get navbar :key)
         navbar-comp   (get-in component-registry [:navbar navbar-key])
+
+        navbar-dropdown-active? (get navbar-dropdown :active?)
+        navbar-dropdown-key    (get navbar-dropdown :key)
+        navbar-dropdown-comp   (get-in component-registry [:navbar-dropdown navbar-dropdown-key])
 
         body-key  (get body :key)
         body-comp (get-in component-registry [:body body-key])
@@ -224,6 +241,11 @@
                                     navbar-comp
                                     navbar-fixed?)
                                "surf-surface-navbar-fixed")
+
+                             (when (and
+                                    navbar-dropdown-comp
+                                    navbar-dropdown-active?)
+                               "surf-surface-navbar-dropdown-active")
 
                              (when (and
                                     footer-comp
@@ -284,6 +306,15 @@
 
       ;; MAIN
       [:div.surf-main
+
+       ;; navbar dropdown if header fixed and not navbar
+       (when (and navbar-comp
+                  navbar-dropdown-comp
+                  header-fixed?
+                  (not navbar-fixed?))
+         [:div.surf-navbar-dropdown
+          [navbar-dropdown-comp app-state]])
+
        (when header-comp
          [:div.surf-header
           (when debug? {:style {:background-color "grey"}})
@@ -294,9 +325,17 @@
           (when debug? {:style {:background-color "lightgrey"}})
           [navbar-comp app-state]])
 
-       (when header-dropdown-comp
+       ;; navbar dropdown if header isn't fixed
+       (when (and navbar-comp
+                  navbar-dropdown-comp
+                  (or (not header-fixed?)
+                      navbar-fixed?))
+         [:div.surf-navbar-dropdown
+          [navbar-dropdown-comp app-state]])
+
+       (when (and header-comp
+                  header-dropdown-comp)
          [:div.surf-header-dropdown
-          (when debug? {:style {:background-color "darkgrey"}})
           [header-dropdown-comp app-state]])
 
        (when body-comp

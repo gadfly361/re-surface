@@ -11,7 +11,7 @@ the **page** level (which we will be calling a `surface`).
 To use re-surface, add the following to the `:dependencies` vector in your project.clj file:
 
 ```clojure
-[re-surface "0.1.0-alpha"]
+[re-surface "0.1.0-alpha2"]
 ```
 
 **Note: This is very much a work in progress and subject to sweeping changes.**
@@ -64,7 +64,9 @@ using re-frame, you can go ahead and ignore this.
 A component-registry is a hash-map of the following keys:
 
 - `:header`
+- `:header-dropdown`
 - `:navbar`
+- `:navbar-dropdown`
 - `:body`
 - `:footer`
 - `:dimmer`
@@ -114,9 +116,9 @@ A surface-registry is a hash-map.
 - The keys are used by `surface-key` to lookup which surface to render.
 - The values are a hash-map of the following:
 
-### :header
+### :header / :navbar / :footer
 
-`:header` takes a hash-map of the following:
+`:header`, `:navbar`, and `:footer` take a hash-map of the following:
 
 | key          | type               | default     | required? |
 |--------------|--------------------|-------------|-----------|
@@ -127,16 +129,21 @@ A surface-registry is a hash-map.
 
 - `:key` is used to lookup a component from the component-registry
 
-### :navbar
+### :header-dropdown / :navbar-dropdown
 
-`:navbar` takes a hash-map of the following:
+`:header-dropdown` and `:navbar-dropdown` take a hash-map of the following:
 
 | key          | type               | default     | required? |
 |--------------|--------------------|-------------|-----------|
+| :active?     | boolean            | false       | no        |
 | :background-color | string        | "white"     | no        |
-| :fixed?      | boolean            | false       | no        |
-| :height      | int                |             | **yes**   |
+| :bottom      | int                |             | no        |
+| :height      | int                |             | no        |
 | :key         | keyword            |             | **yes**   |
+| :left        | int                |             | no        |
+| :right       | int                |             | no        |
+| :top         | int                |             | no        |
+| :width       | int                |             | no        |
 
 ### :body
 
@@ -147,16 +154,6 @@ A surface-registry is a hash-map.
 | :background-color | string        | "white"     | no        |
 | :key         | keyword            |             | **yes**   |
 
-### :footer
-
-`:footer` takes a hash-map of the following:
-
-| key          | type               | default     | required? |
-|--------------|--------------------|-------------|-----------|
-| :background-color | string        | "white"     | no        |
-| :fixed?      | boolean            | false       | no        |
-| :height      | int                |             | **yes**   |
-| :key         | keyword            |             | **yes**   |
 
 ### :dimmer
 
@@ -222,8 +219,6 @@ A surface-registry is a hash-map.
 
 The following things are on my mind:
 
-- header-dropdown
-- navbar-dropdown
 - notifications
 - snackbar / toast
 

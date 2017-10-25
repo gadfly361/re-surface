@@ -7,7 +7,7 @@
   [:div
    [:h1
     "You should see a button in the header that will toggle the
-    header-dropdown."]
+    header-dropdown. And finally, let's add a navbar dropdown."]
    [:br]
    [:button
     {:on-click #(swap! app-state update :page-key
@@ -42,6 +42,9 @@
    [:button
     {:on-click #(util/set-hash! "/surface/15")}
     "Back"]
+   [:button
+    {:on-click #(util/set-hash! "/surface/17")}
+    "Add navbar dropdown"]
 
    (for [x (range 42)]
      ^{:key x}

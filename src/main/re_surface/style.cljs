@@ -292,6 +292,10 @@
      ]))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Header dropdown
+
 (defn ->header-dropdown [opts]
   (let [surface-config                   (get opts :surface-config)
         surface-map                      (->surface-map opts)
@@ -320,7 +324,7 @@
        :left (px left)
        :background-color "white"
        :opacity 0
-       :transition       "z-index 0.15s step-end, opacity 0.15s linear"}]
+       }]
 
      [:&.surf-surface-header-fixed
       [:.surf-header-dropdown
@@ -335,6 +339,7 @@
        :opacity 1
        :transition       "opacity 0.15s linear"}
       ]]))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -373,6 +378,58 @@
         {:margin-top (px (+ navbar-height
                             header-height))}]]]
      ]))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Navbar dropdown
+
+(defn ->navbar-dropdown [opts]
+  (let [surface-config                   (get opts :surface-config)
+        surface-map                      (->surface-map opts)
+        {:keys [navbar-dropdown
+                navbar
+                header]}                 surface-map
+        {:keys [height
+                width
+                top
+                right
+                bottom
+                left
+                active?
+                background-color]
+         :or   {background-color "white"}} navbar-dropdown
+        header-height                    (get header :height)
+        navbar-height                    (get navbar :height)]
+    [
+     [:.surf-navbar-dropdown
+      {:position         "absolute"
+       :z-index          (get-in surface-config [:z-indicies :navbar-dropdown])
+       :height           (px height)
+       :width            (px width)
+       :top              (px (+ top
+                                header-height
+                                navbar-height))
+       :right (px right)
+       :bottom (px bottom)
+       :left (px left)
+       :background-color "white"
+       :opacity 0
+       }]
+
+     [:&.surf-surface-navbar-fixed
+      [:.surf-navbar-dropdown
+       {:position "fixed"}]]
+     ]))
+
+(defn ->navbar-dropdown-active [opts]
+  (let [surface-config (get opts :surface-config)]
+    [:&.surf-surface-navbar-dropdown-active
+     [:.surf-navbar-dropdown
+      {:z-index (get-in surface-config [:z-indicies :navbar-dropdown-active])
+       :opacity 1
+       :transition       "opacity 0.15s linear"}
+      ]]))
 
 
 
@@ -474,6 +531,9 @@
 
       (->navbar opts)
       (->navbar-fixed opts)
+
+      (->navbar-dropdown opts)
+      (->navbar-dropdown-active opts)
 
       (->body opts)
 
