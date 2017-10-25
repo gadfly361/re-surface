@@ -222,6 +222,12 @@ The following things are on my mind:
 - notifications
 - snackbar / toast
 
+# Questions
+
+If you have questions, I can usually be found hanging out in
+the [clojurians](http://clojurians.net/) #reagent slack channel (my
+handle is `@gadfly361`).
+
 # License
 
 ```
