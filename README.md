@@ -32,7 +32,7 @@ that I even give my CSS a real thought. However, by that time, I have
 already been using some haphazard convention, and, well ...  since
 there is already a lot of momentum, I just hack together something
 that works. Something that will specifically add that sidebar or that
-sticky header, but not something that I am are proud of. You know,
+sticky header, but not something that I am proud of. You know,
 when you add a lot of control flow logic or disaggregated state or
 when you just close your eyes and add new classes to the bottom of an
 ever-growing stylesheet and hope that no one judges you.

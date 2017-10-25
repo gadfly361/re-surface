@@ -6,7 +6,7 @@
 (defn body [app-state]
   [:div
    [:h1
-    "Now that our navar is fixed, let's do something new. Let's
+    "Now that our navbar is fixed, let's do something new. Let's
         add a sidebar to the left side."]
    [:br]
    [:button
