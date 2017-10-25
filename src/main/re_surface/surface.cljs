@@ -132,8 +132,8 @@
                 spec?
                 z-indicies]}   surface-config
         surface-config-updated {:style-component (or style-component style/style)
-                                :debug?          (or debug? false)
-                                :spec?           (or spec? true)
+                                :debug?          (if (nil? debug?) false debug?)
+                                :spec?           (if (nil? spec?) true spec?)
                                 :z-indicies      (or z-indicies z-index/indicies)}]
     (assoc opts-raw :surface-config surface-config-updated)))
 
