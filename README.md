@@ -14,6 +14,8 @@ To use re-surface, add the following to the `:dependencies` vector in your proje
 [re-surface "0.1.0-alpha"]
 ```
 
+**Note: This is very much a work in progress and subject to sweeping changes.**
+
 # The problem
 
 > Should this be position fixed or absolute?
