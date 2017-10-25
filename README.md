@@ -28,11 +28,11 @@ In particular, the CSS regarding the page structure is a mess. It
 isn't until I am asked to add a sidebar or to make a sticky header
 that I even give my CSS a real thought. However, by that time, I have
 already been using some haphazard convention, and, well ...  since
-there is already a lot of moment, I just hack together something that
-works. Something that will specifically add that sidebar or that
-sticky header, but not something I am are proud of. You know, when you
-add a lot of control flow logic or disaggregated state or when you
-just close your eyes and add new classes to the bottom of an
+there is already a lot of momentum, I just hack together something
+that works. Something that will specifically add that sidebar or that
+sticky header, but not something that I am are proud of. You know,
+when you add a lot of control flow logic or disaggregated state or
+when you just close your eyes and add new classes to the bottom of an
 ever-growing stylesheet and hope that no one judges you.
 
 # Re-surface's solution
@@ -53,7 +53,7 @@ A `surface` takes a hash-map of the following:
 | :surface-registry  | surface-registry   |             | **yes**   |
 
 
-(1) The `:app-state` key will get passed to the components of a
+(1) The `:app-state` value will get passed to the components of a
 surface. This is useful if you are using vanilla reagent. However, if you are
 using re-frame, you can go ahead and ignore this.
 
@@ -71,9 +71,9 @@ A component-registry is a hash-map of the following keys:
 - `:modal`
 - `:modal-fullscreen`
 
-The value of each of these is a hash-map where the key is the `:key`
-used in the `surface-registry` and the value is a reagent-component
-that takes a single parameter, `app-state`.
+The value of each of these is a hash-map where:
+- the key is the `:key` used in the `surface-registry`, and
+- the value is a reagent-component that takes a single parameter, `app-state`.
 
 An example component-registry could look like this:
 
@@ -108,9 +108,9 @@ An example surface-registry could look like this:
   :body {:key :about}}}
 ```
 
-A surface-registry is a hash-map. The keys are used by `surface-key`
-to lookup which surface to render. The values are a hash-map of the
-following:
+A surface-registry is a hash-map.
+- The keys are used by `surface-key` to lookup which surface to render.
+- The values are a hash-map of the following:
 
 ### :header
 
@@ -211,7 +211,7 @@ following:
 | :style-component | (fn [opts] [:style ...])       |             | no         |
 | :z-indicies      | z-indicies                     |             | no         |
 
-- `:debug?` can be used if you'd like to see a background color on each of the elements during development.
+- `:debug?` can be used if you'd like to see a background color on each of the elements during development. This was used when creating the demo.
 - `:spec?` can be used to turn on/off cljs.spec assertions.
 - `:style-component` really **shouldn't** be used. This is an escape-hatch to override the CSS provided by re-surface if you absolutely needed to.
 - `:z-indicies` really **shouldn't** be used. This is an escape-hatch to override the z-indicies used for each element.
