@@ -4,6 +4,9 @@
 /resources/public/js
 out
 
+pom.xml
+pom.xml.asc
+
 /demo/js/*/*
 !demo/js/app.js
 
