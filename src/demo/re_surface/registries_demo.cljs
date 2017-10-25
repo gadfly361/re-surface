@@ -15,6 +15,7 @@
    [re-surface.surfaces.surface-13 :as surface-13]
    [re-surface.surfaces.surface-14 :as surface-14]
    [re-surface.surfaces.surface-15 :as surface-15]
+   [re-surface.surfaces.surface-16 :as surface-16]
    ))
 
 
@@ -36,6 +37,7 @@
    surface-13/surfaces
    surface-14/surfaces
    surface-15/surfaces
+   surface-16/surfaces
    ))
 
 
@@ -58,6 +60,7 @@
 
 (def component-registry
   (reduce (fn [registry {:keys [header
+                                header-dropdown
                                 navbar
                                 body
                                 footer
@@ -68,6 +71,7 @@
                                 modal-fullscreen]}]
             (-> registry
                 (update :header #(merge % header))
+                (update :header-dropdown #(merge % header-dropdown))
                 (update :navbar #(merge % navbar))
                 (update :body #(merge % body))
                 (update :footer #(merge % footer))
@@ -92,4 +96,5 @@
            surface-13/components
            surface-14/components
            surface-15/components
+           surface-16/components
            ]))

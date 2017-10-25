@@ -7,7 +7,8 @@
 ;; Util
 
 (defn- px [int]
-  (str int "px"))
+  (when int
+    (str int "px")))
 
 (defn- ->surface-map [opts]
   (let [{:keys [surface-key
@@ -291,6 +292,50 @@
      ]))
 
 
+(defn ->header-dropdown [opts]
+  (let [surface-config                   (get opts :surface-config)
+        surface-map                      (->surface-map opts)
+        {:keys [header-dropdown
+                header]}                 surface-map
+        {:keys [height
+                width
+                top
+                right
+                bottom
+                left
+                active?
+                background-color]
+         :or   {background-color "white"}} header-dropdown
+        header-height                    (get header :height)]
+    [
+     [:.surf-header-dropdown
+      {:position         "absolute"
+       :z-index          (get-in surface-config [:z-indicies :header-dropdown])
+       :height           (px height)
+       :width            (px width)
+       :top              (px (+ top
+                                header-height))
+       :right (px right)
+       :bottom (px bottom)
+       :left (px left)
+       :background-color "white"
+       :opacity 0
+       :transition       "z-index 0.15s step-end, opacity 0.15s linear"}]
+
+     [:&.surf-surface-header-fixed
+      [:.surf-header-dropdown
+       {:position "fixed"}]]
+     ]))
+
+(defn ->header-dropdown-active [opts]
+  (let [surface-config (get opts :surface-config)]
+    [:&.surf-surface-header-dropdown-active
+     [:.surf-header-dropdown
+      {:z-index (get-in surface-config [:z-indicies :header-dropdown-active])
+       :opacity 1
+       :transition       "opacity 0.15s linear"}
+      ]]))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; navbar
@@ -314,13 +359,20 @@
                 header]} surface-map
         navbar-height    (get navbar :height)
         header-height    (get header :height)]
-    [:&.surf-surface-navbar-fixed
-     [:.surf-navbar
-      {:position "fixed"
-       :top      (px header-height)}]
-     [:.surf-body
-      {:margin-top (px (+ navbar-height
-                          header-height))}]]))
+    [
+     [:&.surf-surface-navbar-fixed
+      [:.surf-navbar
+       {:position "fixed"
+        :top      (px header-height)}]
+      [:.surf-body
+       {:margin-top (px (+ navbar-height))}]]
+
+     [:&.surf-surface-navbar-fixed
+      [:&.surf-surface-header-fixed
+       [:.surf-body
+        {:margin-top (px (+ navbar-height
+                            header-height))}]]]
+     ]))
 
 
 
@@ -389,13 +441,6 @@
       {:margin 0}]
 
      [:.surf-surface
-      {:position "absolute"
-       :top      0
-       :bottom   0
-       :left     0
-       :right    0
-       :height   "100%"
-       :z-index  (get-in opts [:surface-config :z-indicies :surface])}
 
       ;; needs to be above sidebar/modal
       (->dimmer opts)
@@ -424,7 +469,9 @@
       (->header opts)
       (->header-fixed opts)
 
-      ;; needs to be under header
+      (->header-dropdown opts)
+      (->header-dropdown-active opts)
+
       (->navbar opts)
       (->navbar-fixed opts)
 

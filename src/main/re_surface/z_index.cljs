@@ -5,6 +5,7 @@
   {:dimmer          -1
    :modal           -1
    :modal-fullscreen -1
+   :header-dropdown -1
 
    :surface 0
    :main    0
@@ -13,6 +14,7 @@
    :header 1
    :navbar 1
    :footer 1
+   :header-dropdown-active 1
 
    ;; TODO: notifications 2
 

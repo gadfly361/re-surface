@@ -15,7 +15,8 @@
                           (if (= pk :surface-15-modal-fs-with-modal-on-top)
                             :surface-15
                             :surface-15-modal-fs-with-modal-on-top)))}
-     "modal-fullscreen with modal on top"]]
+     "modal-fullscreen with modal on top"]
+    ". Next, let's add a header dropdown."]
    [:br]
    [:button
     {:on-click #(swap! app-state update :page-key
@@ -50,6 +51,10 @@
    [:button
     {:on-click #(util/set-hash! "/surface/14")}
     "Back"]
+
+   [:button
+    {:on-click #(util/set-hash! "/surface/16")}
+    "Add header dropdown"]
 
    (for [x (range 42)]
      ^{:key x}

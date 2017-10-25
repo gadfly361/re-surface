@@ -19,6 +19,10 @@
 (spec/def ::background-color string?)
 (spec/def ::height int?)
 (spec/def ::width int?)
+(spec/def ::top int?)
+(spec/def ::left int?)
+(spec/def ::bottom int?)
+(spec/def ::right int?)
 (spec/def ::active? boolean?)
 (spec/def ::fixed? boolean?)
 
@@ -28,6 +32,17 @@
                       ::height]
              :opt-un [::fixed?
                       ::background-color]))
+
+(spec/def ::header-dropdown
+  (spec/keys :req-un [::key]
+             :opt-un [::active?
+                      ::background-color
+                      ::height
+                      ::width
+                      ::top
+                      ::left
+                      ::bottom
+                      ::right]))
 
 (spec/def ::navbar
   (spec/keys :req-un [::key
@@ -83,6 +98,7 @@
 
 (spec/def ::surface-map
   (spec/keys :opt-un [::header
+                      ::header-dropdown
                       ::navbar
                       ::body
                       ::footer
@@ -129,6 +145,7 @@
                 z-indicies]}   surface-config
 
         {:keys [header
+                header-dropdown
                 navbar
                 body
                 footer
@@ -150,6 +167,10 @@
         header-fixed? (get header :fixed?)
         header-key    (get header :key)
         header-comp   (get-in component-registry [:header header-key])
+
+        header-dropdown-active? (get header-dropdown :active?)
+        header-dropdown-key    (get header-dropdown :key)
+        header-dropdown-comp   (get-in component-registry [:header-dropdown header-dropdown-key])
 
         navbar-fixed? (get navbar :fixed?)
         navbar-key    (get navbar :key)
@@ -193,6 +214,11 @@
                                     header-comp
                                     header-fixed?)
                                "surf-surface-header-fixed")
+
+                             (when (and
+                                    header-dropdown-comp
+                                    header-dropdown-active?)
+                               "surf-surface-header-dropdown-active")
 
                              (when (and
                                     navbar-comp
@@ -267,6 +293,11 @@
          [:div.surf-navbar
           (when debug? {:style {:background-color "lightgrey"}})
           [navbar-comp app-state]])
+
+       (when header-dropdown-comp
+         [:div.surf-header-dropdown
+          (when debug? {:style {:background-color "darkgrey"}})
+          [header-dropdown-comp app-state]])
 
        (when body-comp
          [:div.surf-body
