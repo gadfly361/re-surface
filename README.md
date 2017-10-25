@@ -218,6 +218,15 @@ A surface-registry is a hash-map.
 - `:style-component` really **shouldn't** be used. This is an escape-hatch to override the CSS provided by re-surface if you absolutely needed to.
 - `:z-indicies` really **shouldn't** be used. This is an escape-hatch to override the z-indicies used for each element.
 
+# What's next?
+
+The following things are on my mind:
+
+- header-dropdown
+- navbar-dropdown
+- notifications
+- snackbar / toast
+
 # License
 
 ```
