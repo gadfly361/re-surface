@@ -15,14 +15,14 @@
   :source-paths ["src/main"]
 
   :clean-targets ^{:protect false} ["resources/public/js"
-                                    "demo/js"
                                     "target"]
 
   :profiles
   {:dev
    {:dependencies [[binaryage/devtools "0.8.2"]
                    [re-frisk "0.3.1"]
-                   [secretary "1.2.3"]]
+                   [secretary "1.2.3"]
+                   [etaoin "0.1.8"]]
 
     :plugins [[lein-figwheel "0.5.10"]]
 
@@ -38,6 +38,22 @@
                       :asset-path           "js/dev"
                       :source-map-timestamp true
                       :preloads             [devtools.preload]
+                      :external-config
+                      {:devtools/config
+                       {:features-to-install    [:formatters :hints]
+                        :fn-symbol              "F"
+                        :print-config-overrides true}}}}
+
+      {:id           "screenshots"
+       :source-paths ["src/screenshots" "src/main"]
+       :figwheel     {:on-jsload "re-surface.core-screenshots/reload"}
+       :compiler     {:main                 re-surface.core-screenshots
+                      :optimizations        :none
+                      :output-to            "resources/public/js/app.js"
+                      :output-dir           "resources/public/js/screenshots"
+                      :asset-path           "js/screenshots"
+                      :source-map-timestamp true
+                      :closure-defines {goog.DEBUG false}
                       :external-config
                       {:devtools/config
                        {:features-to-install    [:formatters :hints]
@@ -58,4 +74,5 @@
                       :output-dir      "demo/js/min"
                       :elide-asserts   true
                       :closure-defines {goog.DEBUG false}
-                      :pretty-print    false}}]}}})
+                      :pretty-print    false}}]}}
+   })

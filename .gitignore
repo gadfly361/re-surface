@@ -10,4 +10,8 @@ pom.xml.asc
 /demo/js/*/*
 !demo/js/app.js
 
+/screenshots
+
 *.*~
+
+.nrepl-port

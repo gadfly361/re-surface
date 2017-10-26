@@ -222,11 +222,12 @@
         modal-fullscreen-comp       (get-in component-registry [:modal-fullscreen modal-fullscreen-key])]
     [:div
      [style-component opts]
-     [:div.surf-surface
+     [:div
       {:class
        (string/join " "
                     (remove nil?
-                            [
+                            ["surf-surface"
+
                              (when (and
                                     header-comp
                                     header-fixed?)
@@ -282,25 +283,29 @@
                              ]))}
 
       (when sidebar-left-comp
-        [:div.surf-sidebar-left
-         (when debug? {:style {:background-color "aqua"}})
+        [:div
+         (merge {:class "surf-sidebar-left"}
+                (when debug?
+                  {:style {:background-color "aqua"}}))
          [sidebar-left-comp app-state]])
 
       (when sidebar-right-comp
-        [:div.surf-sidebar-right
-         (when debug? {:style {:background-color "aqua"}})
+        [:div
+         (merge {:class "surf-sidebar-right"}
+                (when debug?
+                  {:style {:background-color "aqua"}}))
          [sidebar-right-comp app-state]])
 
       (when dimmer-comp
-        [:div.surf-dimmer
+        [:div {:class "surf-dimmer"}
          [dimmer-comp app-state]])
 
       (when modal-comp
-        [:div.surf-modal
+        [:div {:class "surf-modal"}
          [modal-comp app-state]])
 
       (when modal-fullscreen-comp
-        [:div.surf-modal-fullscreen
+        [:div {:class "surf-modal-fullscreen"}
          [modal-fullscreen-comp app-state]])
 
 
@@ -312,17 +317,19 @@
                   navbar-dropdown-comp
                   header-fixed?
                   (not navbar-fixed?))
-         [:div.surf-navbar-dropdown
+         [:div {:class "surf-navbar-dropdown"}
           [navbar-dropdown-comp app-state]])
 
        (when header-comp
-         [:div.surf-header
-          (when debug? {:style {:background-color "grey"}})
+         [:div
+          (merge {:class "surf-header"}
+                (when debug? {:style {:background-color "grey"}}))
           [header-comp app-state]])
 
        (when navbar-comp
-         [:div.surf-navbar
-          (when debug? {:style {:background-color "lightgrey"}})
+         [:div
+          (merge {:class "surf-navbar"}
+                 (when debug? {:style {:background-color "lightgrey"}}))
           [navbar-comp app-state]])
 
        ;; navbar dropdown if header isn't fixed
@@ -330,21 +337,23 @@
                   navbar-dropdown-comp
                   (or (not header-fixed?)
                       navbar-fixed?))
-         [:div.surf-navbar-dropdown
+         [:div {:class "surf-navbar-dropdown"}
           [navbar-dropdown-comp app-state]])
 
        (when (and header-comp
                   header-dropdown-comp)
-         [:div.surf-header-dropdown
+         [:div {:class "surf-header-dropdown"}
           [header-dropdown-comp app-state]])
 
        (when body-comp
-         [:div.surf-body
-          (when debug? {:style {:background-color "orange"}})
+         [:div
+          (merge {:class "surf-body"}
+                 (when debug? {:style {:background-color "orange"}}))
           [body-comp app-state]])
 
        (when footer-comp
-         [:div.surf-footer
-          (when debug? {:style {:background-color "purple"}})
+         [:div
+          (merge {:class "surf-footer"}
+                 (when debug? {:style {:background-color "purple"}}))
           [footer-comp app-state]])]
       ]]))
