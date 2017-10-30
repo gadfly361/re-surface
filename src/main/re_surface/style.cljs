@@ -223,6 +223,11 @@
     [:&.surf-surface-modal-fullscreen-active
      ;; remove scrollbar from page underneath
      {:overflow "hidden"}
+
+     [:.surf-main
+      ;; remove scrollbar from main section
+      {:overflow "hidden"}]
+
      [:.surf-modal-fullscreen
       {;; add scrollbar for modal-fullscreen
        :overflow "auto"
