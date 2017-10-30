@@ -24,6 +24,7 @@
 (spec/def ::bottom int?)
 (spec/def ::right int?)
 (spec/def ::active? boolean?)
+(spec/def ::full-width? boolean?)
 (spec/def ::fixed? boolean?)
 
 
@@ -42,7 +43,8 @@
                       ::top
                       ::left
                       ::bottom
-                      ::right]))
+                      ::right
+                      ::full-width?]))
 
 (spec/def ::navbar
   (spec/keys :req-un [::key
@@ -182,6 +184,7 @@
         header-comp   (get-in component-registry [:header header-key])
 
         header-dropdown-active? (get header-dropdown :active?)
+        header-dropdown-full-width? (get header-dropdown :full-width?)
         header-dropdown-key    (get header-dropdown :key)
         header-dropdown-comp   (get-in component-registry [:header-dropdown header-dropdown-key])
 
@@ -190,6 +193,7 @@
         navbar-comp   (get-in component-registry [:navbar navbar-key])
 
         navbar-dropdown-active? (get navbar-dropdown :active?)
+        navbar-dropdown-full-width? (get navbar-dropdown :full-width?)
         navbar-dropdown-key    (get navbar-dropdown :key)
         navbar-dropdown-comp   (get-in component-registry [:navbar-dropdown navbar-dropdown-key])
 
@@ -238,6 +242,11 @@
                                "surf-surface-header-dropdown-active")
 
                              (when (and
+                                    header-dropdown-comp
+                                    header-dropdown-full-width?)
+                               "surf-surface-header-dropdown-full-width")
+
+                             (when (and
                                     navbar-comp
                                     navbar-fixed?)
                                "surf-surface-navbar-fixed")
@@ -248,9 +257,16 @@
                                "surf-surface-navbar-dropdown-active")
 
                              (when (and
+                                    navbar-dropdown-comp
+                                    navbar-dropdown-full-width?)
+                               "surf-surface-navbar-dropdown-full-width")
+
+
+                             (when (and
                                     footer-comp
                                     footer-fixed?)
                                "surf-surface-footer-fixed")
+
 
                              (when (and
                                     sidebar-left-comp
@@ -269,6 +285,7 @@
                                     sidebar-right-comp
                                     sidebar-right-fixed?)
                                "surf-surface-sidebar-right-fixed")
+
 
                              (when (and
                                     modal-comp

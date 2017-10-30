@@ -7,7 +7,7 @@
   [:div
    [:h1
     "You should see a button in the header that will toggle the
-    header-dropdown. And finally, let's add a navbar dropdown."]
+    header-dropdown. Next, let's add a navbar dropdown."]
    [:br]
    [:button
     {:on-click #(swap! app-state update :page-key

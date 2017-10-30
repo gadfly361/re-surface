@@ -326,21 +326,41 @@
        :left             (px left)
        :background-color "white"
        :opacity          0
+       :transition       "z-index 0.15s step-end, opacity 0.15s"
+       :overflow         "auto"
        }]
 
      [:&.surf-surface-header-fixed
       [:.surf-header-dropdown
        {:position "fixed"}]]
+
+     [:&.surf-surface-header-dropdown-full-width
+      [:.surf-header-dropdown
+       {:height     "0px"
+        :width      "100%"
+        :transition "z-index 0.3s step-end, opacity 0.3s step-end,  height 0.3s linear"}]]
      ]))
 
 (defn ->header-dropdown-active [opts]
-  (let [surface-config (get opts :surface-config)]
-    [:&.surf-surface-header-dropdown-active
-     [:.surf-header-dropdown
-      {:z-index    (get-in surface-config [:z-indicies :header-dropdown-active])
-       :opacity    1
-       :transition "opacity 0.15s linear"}
-      ]]))
+  (let [surface-config            (get opts :surface-config)
+        surface-map               (->surface-map opts)
+        {:keys [header-dropdown]} surface-map
+        height                    (get header-dropdown :height)]
+    [
+     [:&.surf-surface-header-dropdown-active
+      [:.surf-header-dropdown
+       {:z-index    (get-in surface-config [:z-indicies :header-dropdown-active])
+        :opacity    1
+        :transition "opacity 0.15s linear"}
+       ]]
+
+     [:&.surf-surface-header-dropdown-active
+      [:&.surf-surface-header-dropdown-full-width
+       [:.surf-header-dropdown
+        {:height     (px height)
+         :transition "opacity 0.15s linear,  height 0.3s linear"}
+        ]]]
+     ]))
 
 
 
@@ -417,21 +437,41 @@
        :left             (px left)
        :background-color "white"
        :opacity          0
+       :transition       "z-index 0.15s step-end, opacity 0.15s"
+       :overflow "auto"
        }]
 
      [:&.surf-surface-navbar-fixed
       [:.surf-navbar-dropdown
        {:position "fixed"}]]
+
+     [:&.surf-surface-navbar-dropdown-full-width
+      [:.surf-navbar-dropdown
+       {:height     "0px"
+        :width      "100%"
+        :transition "z-index 0.3s step-end, opacity 0.3s step-end,  height 0.3s linear"}]]
      ]))
 
 (defn ->navbar-dropdown-active [opts]
-  (let [surface-config (get opts :surface-config)]
-    [:&.surf-surface-navbar-dropdown-active
-     [:.surf-navbar-dropdown
-      {:z-index    (get-in surface-config [:z-indicies :navbar-dropdown-active])
-       :opacity    1
-       :transition "opacity 0.15s linear"}
-      ]]))
+  (let [surface-config (get opts :surface-config)
+        surface-map               (->surface-map opts)
+        {:keys [navbar-dropdown]} surface-map
+        height                    (get navbar-dropdown :height)]
+    [
+     [:&.surf-surface-navbar-dropdown-active
+      [:.surf-navbar-dropdown
+       {:z-index    (get-in surface-config [:z-indicies :navbar-dropdown-active])
+        :opacity    1
+        :transition "opacity 0.15s linear"}
+       ]]
+
+     [:&.surf-surface-navbar-dropdown-active
+      [:&.surf-surface-navbar-dropdown-full-width
+       [:.surf-navbar-dropdown
+        {:height     (px height)
+         :transition "opacity 0.15s linear,  height 0.3s linear"}
+        ]]]
+     ]))
 
 
 

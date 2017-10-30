@@ -138,12 +138,15 @@ A surface-registry is a hash-map.
 | :active?     | boolean            | false       | no        |
 | :background-color | string        | "white"     | no        |
 | :bottom      | int                |             | no        |
-| :height      | int                |             | no        |
+| :full-width? | int                | false       | no (2)    |
+| :height      | int                |             | no (2)    |
 | :key         | keyword            |             | **yes**   |
 | :left        | int                |             | no        |
 | :right       | int                |             | no        |
 | :top         | int                |             | no        |
-| :width       | int                |             | no        |
+| :width       | int                |             | no  (2)   |
+
+(2) If you use `full-width?`, then you must use `height` and `width` will be ignored.
 
 ### :body
 

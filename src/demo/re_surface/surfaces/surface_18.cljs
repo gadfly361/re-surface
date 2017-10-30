@@ -1,4 +1,4 @@
-(ns re-surface.surfaces.surface-17
+(ns re-surface.surfaces.surface-18
   (:require
    [re-surface.util-demo :as util]))
 
@@ -6,45 +6,45 @@
 (defn body [app-state]
   [:div
    [:h1
-    "You should see a button in the navbar that will toggle the
-    navbar-dropdown. Now, let's make our header-dropdown full-width!"]
+    "If you click the dropdown button in the header, it should now be
+    full-width. Let's go ahead and make the navbar-dropdown full-width too."]
    [:br]
    [:button
     {:on-click #(swap! app-state update :page-key
                        (fn [pk]
-                         (if (= pk :surface-17-modal)
-                           :surface-17
-                           :surface-17-modal)))}
+                         (if (= pk :surface-18-modal)
+                           :surface-18
+                           :surface-18-modal)))}
     "modal"]
    [:button
     {:on-click #(swap! app-state update :page-key
                        (fn [pk]
-                         (if (= pk :surface-17-modal-fs)
-                           :surface-17
-                           :surface-17-modal-fs)))}
+                         (if (= pk :surface-18-modal-fs)
+                           :surface-18
+                           :surface-18-modal-fs)))}
     "modal-fullscreen"]
    [:br]
    [:button
     {:on-click #(swap! app-state update :page-key
                        (fn [pk]
-                         (if (= pk :surface-17-sla)
-                           :surface-17
-                           :surface-17-sla)))}
+                         (if (= pk :surface-18-sla)
+                           :surface-18
+                           :surface-18-sla)))}
     "sidebar-left"]
    [:button
     {:on-click #(swap! app-state update :page-key
                        (fn [pk]
-                         (if (= pk :surface-17-sra)
-                           :surface-17
-                           :surface-17-sra)))}
+                         (if (= pk :surface-18-sra)
+                           :surface-18
+                           :surface-18-sra)))}
     "sidebar-right"]
    [:br]
    [:button
-    {:on-click #(util/set-hash! "/surface/16")}
+    {:on-click #(util/set-hash! "/surface/17")}
     "Back"]
    [:button
-    {:on-click #(util/set-hash! "/surface/18")}
-    "Make header-dropdown full-width"]
+    {:on-click #(util/set-hash! "/surface/19")}
+    "Make navbar-dropdown full-width"]
 
    (for [x (range 42)]
      ^{:key x}
@@ -58,19 +58,12 @@
    [:button
     {:on-click #(swap! app-state update :page-key
                        (fn [x]
-                         (if (= x :surface-17-header-dropdown)
-                         :surface-17
-                         :surface-17-header-dropdown)))}
+                         (if (= x :surface-18-header-dropdown)
+                         :surface-18
+                         :surface-18-header-dropdown)))}
     "header-dropdown"]])
 
 (defn header-dropdown [app-state]
-  [:div
-   [:h3 "header dropdown"]
-   (for [x (range 10)]
-     ^{:key x}
-     [:h4 x])])
-
-(defn header-dropdown-fw [app-state]
   [:div
    [:h3 "header dropdown (full-width)"]
    (for [x (range 10)]
@@ -84,9 +77,9 @@
    [:button
     {:on-click #(swap! app-state update :page-key
                        (fn [x]
-                         (if (= x :surface-17-navbar-dropdown)
-                         :surface-17
-                         :surface-17-navbar-dropdown)))}
+                         (if (= x :surface-18-navbar-dropdown)
+                         :surface-18
+                         :surface-18-navbar-dropdown)))}
     "navbar-dropdown"]])
 
 (defn navbar-dropdown [app-state]
@@ -103,14 +96,14 @@
    {:style    {:height "100%"
                :width  "100%"}
     :on-click (fn []
-                (swap! app-state assoc :page-key :surface-17))}])
+                (swap! app-state assoc :page-key :surface-18))}])
 
 (defn dimmer-with-modal-on-top [app-state]
   [:div
    {:style    {:height "100%"
                :width  "100%"}
     :on-click (fn []
-                (swap! app-state assoc :page-key :surface-17-modal-fs))}])
+                (swap! app-state assoc :page-key :surface-18-modal-fs))}])
 
 (defn modal [app-state]
   [:div
@@ -127,11 +120,11 @@
    [:h1 "Modal (fullscreen)"]
    [:button
     {:on-click (fn []
-                 (swap! app-state assoc :page-key :surface-17))}
+                 (swap! app-state assoc :page-key :surface-18))}
     "Close"]
    [:button
     {:on-click (fn []
-                 (swap! app-state assoc :page-key :surface-17-modal-fs-with-modal-on-top))}
+                 (swap! app-state assoc :page-key :surface-18-modal-fs-with-modal-on-top))}
     "Open modal on top"]
    (for [x (range 48)]
      ^{:key x}
@@ -140,31 +133,32 @@
 
 
 (def components
-  {:header {:surface-17-header header}
-   :header-dropdown {:surface-17-header-dropdown header-dropdown}
-   :navbar {:surface-17-navbar navbar}
-   :navbar-dropdown {:surface-17-navbar-dropdown navbar-dropdown}
-   :body             {:surface-17-body body}
-   :dimmer           {:surface-17-dimmer dimmer
-                      :surface-17-dimmer-with-modal-on-top dimmer-with-modal-on-top}
-   :modal            {:surface-17-modal modal}
-   :modal-fullscreen {:surface-17-modal-fs modal-fs}})
+  {:header {:surface-18-header header}
+   :header-dropdown {:surface-18-header-dropdown header-dropdown}
+   :navbar {:surface-18-navbar navbar}
+   :navbar-dropdown {:surface-18-navbar-dropdown navbar-dropdown}
+   :body             {:surface-18-body body}
+   :dimmer           {:surface-18-dimmer dimmer
+                      :surface-18-dimmer-with-modal-on-top dimmer-with-modal-on-top}
+   :modal            {:surface-18-modal modal}
+   :modal-fullscreen {:surface-18-modal-fs modal-fs}})
 
 
 (def surface-init
-  {:header           {:key    :surface-17-header
+  {:header           {:key    :surface-18-header
                       :height 100
                       :fixed? true}
-   :header-dropdown {:key :surface-17-header-dropdown
+   :header-dropdown {:key :surface-18-header-dropdown
                      :active? false
-                     :top -24}
-   :navbar           {:key    :surface-17-navbar
+                     :height 250
+                     :full-width? true}
+   :navbar           {:key    :surface-18-navbar
                       :height 100
                       :fixed? true}
-   :navbar-dropdown {:key     :surface-17-navbar-dropdown
+   :navbar-dropdown {:key     :surface-18-navbar-dropdown
                      :active? false
                      :top     -24}
-   :body             {:key :surface-17-body}
+   :body             {:key :surface-18-body}
    :footer           {:key    :default
                       :height 100
                       :fixed? true}
@@ -174,45 +168,45 @@
    :sidebar-right    {:key     :default
                       :width   200
                       :active? false}
-   :dimmer           {:key :surface-17-dimmer}
-   :modal            {:key     :surface-17-modal
+   :dimmer           {:key :surface-18-dimmer}
+   :modal            {:key     :surface-18-modal
                       :active? false
                       :width   300
                       :height  500}
-   :modal-fullscreen {:key        :surface-17-modal-fs
+   :modal-fullscreen {:key        :surface-18-modal-fs
                       :active?    false
                       }})
 
 (def surfaces
-  {:surface-17 surface-init
+  {:surface-18 surface-init
 
    ;; sla --> sidebar-left-active
-   :surface-17-sla (-> surface-init
+   :surface-18-sla (-> surface-init
                        (assoc-in [:sidebar-left :active?] true))
 
    ;; sra --> sidebar-right-active
-   :surface-17-sra (-> surface-init
+   :surface-18-sra (-> surface-init
                        (assoc-in [:sidebar-right :active?] true))
 
 
-   :surface-17-modal (-> surface-init
+   :surface-18-modal (-> surface-init
                          (assoc-in [:modal :active?] true))
 
    ;; fs --> fullscreen
-   :surface-17-modal-fs (-> surface-init
+   :surface-18-modal-fs (-> surface-init
                             (assoc-in [:modal-fullscreen :active?] true))
 
-   :surface-17-modal-fs-with-modal-on-top
+   :surface-18-modal-fs-with-modal-on-top
    (-> surface-init
        (assoc-in [:modal-fullscreen :active?] true)
-       (assoc-in [:dimmer :key] :surface-17-dimmer-with-modal-on-top)
+       (assoc-in [:dimmer :key] :surface-18-dimmer-with-modal-on-top)
        (assoc-in [:modal :active?] true))
 
-   :surface-17-header-dropdown
+   :surface-18-header-dropdown
    (-> surface-init
        (assoc-in [:header-dropdown :active?] true))
 
-   :surface-17-navbar-dropdown
+   :surface-18-navbar-dropdown
    (-> surface-init
        (assoc-in [:navbar-dropdown :active?] true))
    })

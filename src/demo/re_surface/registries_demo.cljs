@@ -17,6 +17,8 @@
    [re-surface.surfaces.surface-15 :as surface-15]
    [re-surface.surfaces.surface-16 :as surface-16]
    [re-surface.surfaces.surface-17 :as surface-17]
+   [re-surface.surfaces.surface-18 :as surface-18]
+   [re-surface.surfaces.surface-19 :as surface-19]
    ))
 
 
@@ -40,6 +42,8 @@
    surface-15/surfaces
    surface-16/surfaces
    surface-17/surfaces
+   surface-18/surfaces
+   surface-19/surfaces
    ))
 
 
@@ -102,4 +106,6 @@
            surface-15/components
            surface-16/components
            surface-17/components
+           surface-18/components
+           surface-19/components
            ]))
