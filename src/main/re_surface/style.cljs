@@ -41,9 +41,9 @@
 ;; Sidebar Left
 
 (defn- ->sidebar-left [opts]
-  (let [surface-map    (->surface-map opts)
-        surface-config (get opts :surface-config)
-        width          (get-in surface-map [:sidebar-left :width])
+  (let [surface-map      (->surface-map opts)
+        surface-config   (get opts :surface-config)
+        width            (get-in surface-map [:sidebar-left :width])
         background-color (get-in surface-map [:sidebar-left :background-color] "white")]
     [:.surf-sidebar-left
      {:position         "fixed"
@@ -54,6 +54,7 @@
       :width            (px width)
       :left             (px (- width))
       :transition       "left 0.3s linear"
+      :overflow         "auto"
       :z-index          (get-in surface-config [:z-indicies :sidebar-left])}]))
 
 
@@ -88,9 +89,9 @@
 ;; Sidebar Right
 
 (defn- ->sidebar-right [opts]
-  (let [surface-config (get opts :surface-config)
-        surface-map    (->surface-map opts)
-        width          (get-in surface-map [:sidebar-right :width])
+  (let [surface-config   (get opts :surface-config)
+        surface-map      (->surface-map opts)
+        width            (get-in surface-map [:sidebar-right :width])
         background-color (get-in surface-map [:sidebar-right :background-color] "white")]
     [:.surf-sidebar-right
      {:position         "fixed"
@@ -101,6 +102,7 @@
       :width            (px width)
       :right            (px (- width))
       :transition       "right 0.3s linear"
+      :overflow         "auto"
       :z-index          (get-in surface-config [:z-indicies :sidebar-right])}]))
 
 (defn- ->sidebar-right-active [opts]
@@ -154,23 +156,23 @@
 ;; Modal
 
 (defn- ->modal [opts]
-  (let [surface-config (get opts :surface-config)
-        surface-map    (->surface-map opts)
-        height         (get-in surface-map [:modal :height])
-        width          (get-in surface-map [:modal :width])
-        half-width     (/ width 2)
-        background-color    (get-in surface-map [:modal :background-color] "white")]
+  (let [surface-config   (get opts :surface-config)
+        surface-map      (->surface-map opts)
+        height           (get-in surface-map [:modal :height])
+        width            (get-in surface-map [:modal :width])
+        half-width       (/ width 2)
+        background-color (get-in surface-map [:modal :background-color] "white")]
     [:.surf-modal
-      {:position         "fixed"
-       :background-color background-color
-       :overflow-y       "auto"
-       :top              "-20px" ;; arbitrary
-       :left             (str "calc(50% - " (or half-width 0) "px)")
-       :height           (px height)
-       :width            (px width)
-       :opacity          0
-       :transition       "z-index 0.3s step-end, opacity 0.3s linear, top 0.3s linear"
-       :z-index          (get-in surface-config [:z-indicies :modal])}]
+     {:position         "fixed"
+      :background-color background-color
+      :overflow-y       "auto"
+      :top              "-20px" ;; arbitrary
+      :left             (str "calc(50% - " (or half-width 0) "px)")
+      :height           (px height)
+      :width            (px width)
+      :opacity          0
+      :transition       "z-index 0.3s step-end, opacity 0.3s linear, top 0.3s linear"
+      :z-index          (get-in surface-config [:z-indicies :modal])}]
     ))
 
 (defn- ->modal-active [opts]
@@ -223,7 +225,7 @@
      {:overflow "hidden"}
      [:.surf-modal-fullscreen
       {;; add scrollbar for modal-fullscreen
-       :overflow   "auto"
+       :overflow "auto"
 
        :opacity    1
        :z-index    (get-in surface-config [:z-indicies :modal-fullscreen-active])
@@ -297,10 +299,10 @@
 ;; Header dropdown
 
 (defn ->header-dropdown [opts]
-  (let [surface-config                   (get opts :surface-config)
-        surface-map                      (->surface-map opts)
+  (let [surface-config                     (get opts :surface-config)
+        surface-map                        (->surface-map opts)
         {:keys [header-dropdown
-                header]}                 surface-map
+                header]}                   surface-map
         {:keys [height
                 width
                 top
@@ -310,7 +312,7 @@
                 active?
                 background-color]
          :or   {background-color "white"}} header-dropdown
-        header-height                    (get header :height)]
+        header-height                      (get header :height)]
     [
      [:.surf-header-dropdown
       {:position         "absolute"
@@ -319,11 +321,11 @@
        :width            (px width)
        :top              (px (+ top
                                 header-height))
-       :right (px right)
-       :bottom (px bottom)
-       :left (px left)
+       :right            (px right)
+       :bottom           (px bottom)
+       :left             (px left)
        :background-color "white"
-       :opacity 0
+       :opacity          0
        }]
 
      [:&.surf-surface-header-fixed
@@ -335,9 +337,9 @@
   (let [surface-config (get opts :surface-config)]
     [:&.surf-surface-header-dropdown-active
      [:.surf-header-dropdown
-      {:z-index (get-in surface-config [:z-indicies :header-dropdown-active])
-       :opacity 1
-       :transition       "opacity 0.15s linear"}
+      {:z-index    (get-in surface-config [:z-indicies :header-dropdown-active])
+       :opacity    1
+       :transition "opacity 0.15s linear"}
       ]]))
 
 
@@ -385,11 +387,11 @@
 ;; Navbar dropdown
 
 (defn ->navbar-dropdown [opts]
-  (let [surface-config                   (get opts :surface-config)
-        surface-map                      (->surface-map opts)
+  (let [surface-config                     (get opts :surface-config)
+        surface-map                        (->surface-map opts)
         {:keys [navbar-dropdown
                 navbar
-                header]}                 surface-map
+                header]}                   surface-map
         {:keys [height
                 width
                 top
@@ -399,8 +401,8 @@
                 active?
                 background-color]
          :or   {background-color "white"}} navbar-dropdown
-        header-height                    (get header :height)
-        navbar-height                    (get navbar :height)]
+        header-height                      (get header :height)
+        navbar-height                      (get navbar :height)]
     [
      [:.surf-navbar-dropdown
       {:position         "absolute"
@@ -410,11 +412,11 @@
        :top              (px (+ top
                                 header-height
                                 navbar-height))
-       :right (px right)
-       :bottom (px bottom)
-       :left (px left)
+       :right            (px right)
+       :bottom           (px bottom)
+       :left             (px left)
        :background-color "white"
-       :opacity 0
+       :opacity          0
        }]
 
      [:&.surf-surface-navbar-fixed
@@ -426,9 +428,9 @@
   (let [surface-config (get opts :surface-config)]
     [:&.surf-surface-navbar-dropdown-active
      [:.surf-navbar-dropdown
-      {:z-index (get-in surface-config [:z-indicies :navbar-dropdown-active])
-       :opacity 1
-       :transition       "opacity 0.15s linear"}
+      {:z-index    (get-in surface-config [:z-indicies :navbar-dropdown-active])
+       :opacity    1
+       :transition "opacity 0.15s linear"}
       ]]))
 
 
@@ -473,7 +475,7 @@
       :z-index          (get-in surface-config [:z-indicies :footer])}]))
 
 (defn- ->footer-fixed [opts]
-  (let [surface-map (->surface-map opts)
+  (let [surface-map      (->surface-map opts)
         {:keys [footer]} surface-map
         height           (get footer :height)]
     [:&.surf-surface-footer-fixed
