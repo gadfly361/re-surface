@@ -329,7 +329,7 @@
        :right            (px right)
        :bottom           (px bottom)
        :left             (px left)
-       :background-color "white"
+       :background-color background-color
        :opacity          0
        :transition       "z-index 0.15s step-end, opacity 0.15s"
        :overflow         "auto"
@@ -440,7 +440,7 @@
        :right            (px right)
        :bottom           (px bottom)
        :left             (px left)
-       :background-color "white"
+       :background-color background-color
        :opacity          0
        :transition       "z-index 0.15s step-end, opacity 0.15s"
        :overflow "auto"
