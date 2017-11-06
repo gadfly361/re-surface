@@ -53,7 +53,7 @@
       :height           "100%"
       :width            (px width)
       :left             (px (- width))
-      :transition       "left 0.3s linear"
+      :transition       "left 0.3s linear, width 0.3s linear"
       :overflow         "auto"
       :z-index          (get-in surface-config [:z-indicies :sidebar-left])}]))
 
@@ -63,7 +63,7 @@
     [:&.surf-surface-sidebar-left-active
      [:.surf-sidebar-left
       {:left       (px 0)
-       :transition "left 0.3s linear"}]
+       :transition "left 0.3s linear, width 0.3s linear"}]
      [:.surf-dimmer
       {:opacity    0.5
        :transition "opacity 0.3s linear"
@@ -76,12 +76,12 @@
     [:&.surf-surface-sidebar-left-fixed
      [:.surf-sidebar-left
       {:left       (px 0)
-       :transition "left 0.3s linear"}]
+       :transition "left 0.3s linear, width 0.3s linear"}]
 
      [:.surf-main
       {:left       (px width)
        :width      (str "calc(100% - " width "px)")
-       :transition "left 0.3s linear"}]]))
+       :transition "left 0.3s linear, width 0.3s linear"}]]))
 
 
 
@@ -101,7 +101,7 @@
       :height           "100%"
       :width            (px width)
       :right            (px (- width))
-      :transition       "right 0.3s linear"
+      :transition       "right 0.3s linear, width 0.3s linear"
       :overflow         "auto"
       :z-index          (get-in surface-config [:z-indicies :sidebar-right])}]))
 
@@ -110,7 +110,7 @@
     [:&.surf-surface-sidebar-right-active
      [:.surf-sidebar-right
       {:right      (px 0)
-       :transition "right 0.3s linear"}]
+       :transition "right 0.3s linear, width 0.3s linear"}]
 
      [:.surf-dimmer
       {:opacity    0.5
@@ -124,12 +124,12 @@
     [:&.surf-surface-sidebar-right-fixed
      [:.surf-sidebar-right
       {:right      (px 0)
-       :transition "right 0.3s linear"}]
+       :transition "right 0.3s linear, width 0.3s linear"}]
 
      [:.surf-main
       {:right      (px width)
        :width      (str "calc(100% - " width "px)")
-       :transition "right 0.3s linear"}]]))
+       :transition "right 0.3s linear, width 0.3s linear"}]]))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -443,7 +443,7 @@
        :background-color background-color
        :opacity          0
        :transition       "z-index 0.15s step-end, opacity 0.15s"
-       :overflow "auto"
+       :overflow         "auto"
        }]
 
      [:&.surf-surface-navbar-fixed
@@ -458,7 +458,7 @@
      ]))
 
 (defn ->navbar-dropdown-active [opts]
-  (let [surface-config (get opts :surface-config)
+  (let [surface-config            (get opts :surface-config)
         surface-map               (->surface-map opts)
         {:keys [navbar-dropdown]} surface-map
         height                    (get navbar-dropdown :height)]

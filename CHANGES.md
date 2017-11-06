@@ -1,5 +1,13 @@
 # Changes
 
+## 0.1.0-alpha5 (2017-11-07)
+
+[source](https://github.com/gadfly361/re-surface/tree/v0.1.0-alpha5)
+
+- fix bug where modal had two vertical scrollbars [#4](https://github.com/gadfly361/re-surface/issues/4)
+- add transition on width to sidebars [#6](https://github.com/gadfly361/re-surface/issues/6)
+- fix bug where header-dropdown / navbar-dropdown always had white background [#7](https://github.com/gadfly361/re-surface/issues/7)
+
 ## 0.1.0-alpha4 (2017-10-30)
 
 [source](https://github.com/gadfly361/re-surface/tree/v0.1.0-alpha4)
