@@ -1,5 +1,11 @@
 # Changes
 
+## 0.1.0 (2017-12-12)
+
+[source](https://github.com/gadfly361/re-surface/tree/v0.1.0)
+
+- don't require height on modal
+
 ## 0.1.0-alpha5 (2017-11-07)
 
 [source](https://github.com/gadfly361/re-surface/tree/v0.1.0-alpha5)

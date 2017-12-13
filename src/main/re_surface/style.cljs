@@ -168,7 +168,7 @@
       :overflow-y       "auto"
       :top              "-20px" ;; arbitrary
       :left             (str "calc(50% - " (or half-width 0) "px)")
-      :height           (px height)
+      :height           (when height (px height))
       :width            (px width)
       :opacity          0
       :transition       "z-index 0.3s step-end, opacity 0.3s linear, top 0.3s linear"
@@ -178,8 +178,6 @@
 (defn- ->modal-active [opts]
   (let [surface-config (get opts :surface-config)
         surface-map    (->surface-map opts)
-        width          (get-in surface-map [:modal :width])
-        height         (get-in surface-map [:modal :height])
         top            (get-in surface-map [:modal :top] 40)]
     [:&.surf-surface-modal-active
 

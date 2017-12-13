@@ -98,9 +98,9 @@
 
 (spec/def ::modal
   (spec/keys :req-un [::key
-                      ::height
                       ::width]
              :opt-un [::active?
+                      ::height
                       ::background-color]))
 
 (spec/def ::modal-fullscreen
