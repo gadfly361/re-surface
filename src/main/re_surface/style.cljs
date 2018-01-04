@@ -21,19 +21,25 @@
 ;; Dimmer
 
 (defn- ->dimmer [opts]
-  (let [surface-config (get opts :surface-config)]
-    [:.surf-dimmer
-     {:position         "fixed"
-      :top              0
-      :bottom           0
-      :left             0
-      :right            0
-      :height           "100%"
-      :width            "100%"
-      :background-color "black"
-      :opacity          0
-      :transition       "z-index 0.3s step-end, opacity 0.3s linear"
-      :z-index          (get-in surface-config [:z-indicies :dimmer])}]))
+  (let [surface-map    (->surface-map opts)
+        surface-config (get opts :surface-config)]
+    [
+     [:.surf-dimmer :.surf-dimmer-dropdown
+      {:position         "fixed"
+       :background-color "black"
+       :top              0
+       :bottom           0
+       :left             0
+       :right            0
+       :height           "100%"
+       :width            "100%"
+       :opacity          0
+       :transition       "z-index 0.3s step-end, opacity 0.3s linear"
+       :z-index          (get-in surface-config [:z-indicies :dimmer])}]
+
+     [:.surf-dimmer-dropdown
+      {:background-color "rgba(0,0,0,0.1)"}]
+     ]))
 
 
 
@@ -67,7 +73,7 @@
      [:.surf-dimmer
       {:opacity    0.5
        :transition "opacity 0.3s linear"
-       :z-index    (get-in surface-config [:z-indicies :dimmer-active])}]]))
+       :z-index    (get-in surface-config [:z-indicies :dimmer-with-sidebar])}]]))
 
 
 (defn- ->sidebar-left-fixed [opts]
@@ -115,7 +121,7 @@
      [:.surf-dimmer
       {:opacity    0.5
        :transition "opacity 0.3s linear"
-       :z-index    (get-in surface-config [:z-indicies :dimmer-active])}]]))
+       :z-index    (get-in surface-config [:z-indicies :dimmer-with-sidebar])}]]))
 
 
 (defn- ->sidebar-right-fixed [opts]
@@ -171,7 +177,6 @@
       :height           (when height (px height))
       :width            (px width)
       :opacity          0
-      :transition       "z-index 0.3s step-end, opacity 0.3s linear, top 0.3s linear"
       :z-index          (get-in surface-config [:z-indicies :modal])}]
     ))
 
@@ -190,7 +195,7 @@
      [:.surf-dimmer
       {:opacity    0.5
        :transition "opacity 0.3s linear"
-       :z-index    (get-in surface-config [:z-indicies :dimmer-active-with-modal])}]
+       :z-index    (get-in surface-config [:z-indicies :dimmer-with-modal])}]
      ]))
 
 
@@ -212,7 +217,6 @@
       :width            "100%"
       :background-color background-color
       :opacity          0
-      :transition       "z-index 0.15s step-end, opacity 0.15s linear"
       :z-index          (get-in surface-config [:z-indicies :modal-fullscreen])}]))
 
 
@@ -232,7 +236,8 @@
 
        :opacity    1
        :z-index    (get-in surface-config [:z-indicies :modal-fullscreen-active])
-       :transition "opacity 0.15s linear"}]]))
+       :transition "opacity 0.15s linear"}]
+     ]))
 
 
 
@@ -329,7 +334,6 @@
        :left             (px left)
        :background-color background-color
        :opacity          0
-       :transition       "z-index 0.15s step-end, opacity 0.15s"
        :overflow         "auto"
        }]
 
@@ -339,9 +343,7 @@
 
      [:&.surf-surface-header-dropdown-full-width
       [:.surf-header-dropdown
-       {:height     "0px"
-        :width      "100%"
-        :transition "z-index 0.3s step-end, opacity 0.3s step-end,  height 0.3s linear"}]]
+       {:width "100%"}]]
      ]))
 
 (defn ->header-dropdown-active [opts]
@@ -360,9 +362,15 @@
      [:&.surf-surface-header-dropdown-active
       [:&.surf-surface-header-dropdown-full-width
        [:.surf-header-dropdown
-        {:height     (px height)
-         :transition "opacity 0.15s linear,  height 0.3s linear"}
+        {:transition "opacity 0.15s linear"}
         ]]]
+
+     [:&.surf-surface-header-dropdown-active
+      [:.surf-dimmer-dropdown
+       {:opacity    0.5
+        :transition "opacity 0.3s linear"
+        :z-index    (get-in surface-config [:z-indicies :dimmer-with-dropdown])}]]
+
      ]))
 
 
@@ -440,7 +448,6 @@
        :left             (px left)
        :background-color background-color
        :opacity          0
-       :transition       "z-index 0.15s step-end, opacity 0.15s"
        :overflow         "auto"
        }]
 
@@ -450,9 +457,7 @@
 
      [:&.surf-surface-navbar-dropdown-full-width
       [:.surf-navbar-dropdown
-       {:height     "0px"
-        :width      "100%"
-        :transition "z-index 0.3s step-end, opacity 0.3s step-end,  height 0.3s linear"}]]
+       {:width      "100%"}]]
      ]))
 
 (defn ->navbar-dropdown-active [opts]
@@ -471,9 +476,14 @@
      [:&.surf-surface-navbar-dropdown-active
       [:&.surf-surface-navbar-dropdown-full-width
        [:.surf-navbar-dropdown
-        {:height     (px height)
-         :transition "opacity 0.15s linear,  height 0.3s linear"}
+        {:transition "opacity 0.15s linear"}
         ]]]
+
+     [:&.surf-surface-navbar-dropdown-active
+      [:.surf-dimmer-dropdown
+       {:opacity    0.5
+        :transition "opacity 0.3s linear"
+        :z-index    (get-in surface-config [:z-indicies :dimmer-with-dropdown])}]]
      ]))
 
 

@@ -107,12 +107,10 @@
                       :width   200
                       :active? false}
    :dimmer           {:key :surface-14-dimmer}
-   :modal            {:key     :surface-14-modal
-                      :active? false
+   :modal            {:active? false
                       :width   300
                       :height  500}
-   :modal-fullscreen {:key        :surface-14-modal-fs
-                      :active?    false
+   :modal-fullscreen {:active?    false
                       }})
 
 (def surfaces
@@ -128,8 +126,11 @@
 
 
    :surface-14-modal (-> surface-init
+                         (assoc-in [:modal :key] :surface-14-modal)
                          (assoc-in [:modal :active?] true))
 
    ;; fs --> fullscreen
    :surface-14-modal-fs (-> surface-init
+                            (assoc-in [:modal-fullscreen :key]
+                                      :surface-14-modal-fs)
                             (assoc-in [:modal-fullscreen :active?] true))})

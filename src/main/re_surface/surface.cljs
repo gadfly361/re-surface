@@ -29,14 +29,14 @@
 
 
 (spec/def ::header
-  (spec/keys :req-un [::key
-                      ::height]
-             :opt-un [::fixed?
+  (spec/keys :req-un [::key]
+             :opt-un [::height
+                      ::fixed?
                       ::background-color]))
 
 (spec/def ::header-dropdown
-  (spec/keys :req-un [::key]
-             :opt-un [::active?
+  (spec/keys :opt-un [::key
+                      ::active?
                       ::background-color
                       ::height
                       ::width
@@ -47,14 +47,14 @@
                       ::full-width?]))
 
 (spec/def ::navbar
-  (spec/keys :req-un [::key
-                      ::height]
+  (spec/keys :req-un [::key]
              :opt-un [::fixed?
+                      ::height
                       ::background-color]))
 
 (spec/def ::navbar-dropdown
-  (spec/keys :req-un [::key]
-             :opt-un [::active?
+  (spec/keys :opt-un [::key
+                      ::active?
                       ::background-color
                       ::height
                       ::width
@@ -68,9 +68,9 @@
              :opt-un [::background-color]))
 
 (spec/def ::footer
-  (spec/keys :req-un [::key
-                      ::height]
+  (spec/keys :req-un [::key]
              :opt-un [::fixed?
+                      ::height
                       ::background-color]))
 
 (spec/def ::sidebar-left
@@ -91,21 +91,16 @@
   (spec/keys :req-un [::key]))
 
 
-(spec/def ::height-width
-  (spec/keys :req-un [::height
-                      ::width]
-             :opt-un [::background-color]))
-
 (spec/def ::modal
-  (spec/keys :req-un [::key
-                      ::width]
-             :opt-un [::active?
+  (spec/keys :req-un [::width]
+             :opt-un [::key
+                      ::active?
                       ::height
                       ::background-color]))
 
 (spec/def ::modal-fullscreen
-  (spec/keys :req-un [::key]
-             :opt-un [::active?
+  (spec/keys :opt-un [::key
+                      ::active?
                       ::background-color]))
 
 
@@ -143,6 +138,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Surface
+
+(defn- default-comp [app-state]
+  [:div {:style {:height "100%"
+                 :width  "100%"}}])
 
 (defn- surface [opts-raw]
   (let [opts (prepare-opts opts-raw)
@@ -186,7 +185,7 @@
         header-dropdown-active? (get header-dropdown :active?)
         header-dropdown-full-width? (get header-dropdown :full-width?)
         header-dropdown-key    (get header-dropdown :key)
-        header-dropdown-comp   (get-in component-registry [:header-dropdown header-dropdown-key])
+        header-dropdown-comp   (get-in component-registry [:header-dropdown header-dropdown-key] default-comp)
 
         navbar-fixed? (get navbar :fixed?)
         navbar-key    (get navbar :key)
@@ -195,7 +194,7 @@
         navbar-dropdown-active? (get navbar-dropdown :active?)
         navbar-dropdown-full-width? (get navbar-dropdown :full-width?)
         navbar-dropdown-key    (get navbar-dropdown :key)
-        navbar-dropdown-comp   (get-in component-registry [:navbar-dropdown navbar-dropdown-key])
+        navbar-dropdown-comp   (get-in component-registry [:navbar-dropdown navbar-dropdown-key] default-comp)
 
         body-key  (get body :key)
         body-comp (get-in component-registry [:body body-key])
@@ -219,11 +218,11 @@
 
         modal-active?    (get modal :active?)
         modal-key        (get modal :key)
-        modal-comp       (get-in component-registry [:modal modal-key])
+        modal-comp       (get-in component-registry [:modal modal-key] default-comp)
 
         modal-fullscreen-active?    (get modal-fullscreen :active?)
         modal-fullscreen-key        (get modal-fullscreen :key)
-        modal-fullscreen-comp       (get-in component-registry [:modal-fullscreen modal-fullscreen-key])]
+        modal-fullscreen-comp       (get-in component-registry [:modal-fullscreen modal-fullscreen-key] default-comp)]
     [:div
      [style-component opts]
      [:div.surf-surface
@@ -308,6 +307,7 @@
          (when debug? {:style {:background-color "aqua"}})
          [sidebar-right-comp app-state]])
 
+      ;; this dimmer is for everything but dropdowns
       (when dimmer-comp
         [:div.surf-dimmer
          [dimmer-comp app-state]])
@@ -323,6 +323,11 @@
 
       ;; MAIN
       [:div.surf-main
+
+       ;; this dimmer is for dropdowns
+       (when dimmer-comp
+         [:div.surf-dimmer-dropdown
+          [dimmer-comp app-state]])
 
        ;; navbar dropdown if header fixed and not navbar
        (when (and navbar-comp

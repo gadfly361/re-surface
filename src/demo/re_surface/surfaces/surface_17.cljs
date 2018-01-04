@@ -155,14 +155,12 @@
   {:header           {:key    :surface-17-header
                       :height 100
                       :fixed? true}
-   :header-dropdown {:key :surface-17-header-dropdown
-                     :active? false
+   :header-dropdown {:active? false
                      :top -24}
    :navbar           {:key    :surface-17-navbar
                       :height 100
                       :fixed? true}
-   :navbar-dropdown {:key     :surface-17-navbar-dropdown
-                     :active? false
+   :navbar-dropdown {:active? false
                      :top     -24}
    :body             {:key :surface-17-body}
    :footer           {:key    :default
@@ -175,12 +173,10 @@
                       :width   200
                       :active? false}
    :dimmer           {:key :surface-17-dimmer}
-   :modal            {:key     :surface-17-modal
-                      :active? false
+   :modal            {:active? false
                       :width   300
                       :height  500}
-   :modal-fullscreen {:key        :surface-17-modal-fs
-                      :active?    false
+   :modal-fullscreen {:active?    false
                       }})
 
 (def surfaces
@@ -196,23 +192,31 @@
 
 
    :surface-17-modal (-> surface-init
+                         (assoc-in [:modal :key] :surface-17-modal)
                          (assoc-in [:modal :active?] true))
 
    ;; fs --> fullscreen
    :surface-17-modal-fs (-> surface-init
+                            (assoc-in [:modal-fullscreen :key]
+                                      :surface-17-modal-fs)
                             (assoc-in [:modal-fullscreen :active?] true))
 
    :surface-17-modal-fs-with-modal-on-top
    (-> surface-init
+       (assoc-in [:modal-fullscreen :key]
+                 :surface-17-modal-fs)
        (assoc-in [:modal-fullscreen :active?] true)
        (assoc-in [:dimmer :key] :surface-17-dimmer-with-modal-on-top)
+       (assoc-in [:modal :key] :surface-17-modal)
        (assoc-in [:modal :active?] true))
 
    :surface-17-header-dropdown
    (-> surface-init
+       (assoc-in [:header-dropdown :key] :surface-17-header-dropdown)
        (assoc-in [:header-dropdown :active?] true))
 
    :surface-17-navbar-dropdown
    (-> surface-init
+       (assoc-in [:navbar-dropdown :key] :surface-17-navbar-dropdown)
        (assoc-in [:navbar-dropdown :active?] true))
    })

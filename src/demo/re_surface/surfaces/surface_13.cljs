@@ -87,10 +87,10 @@
                    :width   200
                    :active? false}
    :dimmer        {:key :surface-13-dimmer}
-   :modal         {:key     :surface-13-modal
-                   :active? false
+   :modal         {:active? false
                    :width 300
-                   :height 500}})
+                   :height 500
+                   }})
 
 (def surfaces
   {:surface-13 surface-init
@@ -104,4 +104,5 @@
                        (assoc-in [:sidebar-right :active?] true))
 
    :surface-13-modal (-> surface-init
+                         (assoc-in [:modal :key] :surface-13-modal)
                          (assoc-in [:modal :active?] true))})

@@ -1,4 +1,4 @@
-(defproject re-surface "0.1.0"
+(defproject re-surface "0.2.0-alpha1"
   :description "This library is an attempt to provide structure to a reagent application at the page level."
   :url "https://github.com/gadfly361/re-surface"
   :license {:name "MIT"}
@@ -7,7 +7,6 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.229"]
-                 [reagent "0.6.1"]
                  [garden "1.3.2"]]
 
   :min-lein-version "2.5.3"
@@ -21,6 +20,7 @@
   :profiles
   {:dev
    {:dependencies [[binaryage/devtools "0.8.2"]
+                   [reagent "0.6.1"]
                    [re-frisk "0.3.1"]
                    [secretary "1.2.3"]]
 
@@ -46,6 +46,7 @@
 
    :prod
    {:dependencies [[secretary "1.2.3"]
+                   [reagent "0.6.1"]
                    [re-frisk "0.3.1"]]
     :plugins      [[lein-cljsbuild "1.1.4"]]
     :cljsbuild

@@ -58,11 +58,12 @@
    :sidebar-left {:key     :default
                   :width   200
                   :active? false}
-   :dimmer       {:key :surface-10-dimmer}})
+   })
 
 (def surfaces
   {:surface-10 surface-init
 
    ;; sla --> sidebar-left-active
    :surface-10-sla (-> surface-init
+                       (assoc-in [:dimmer :key] :surface-10-dimmer)
                        (assoc-in [:sidebar-left :active?] true))})

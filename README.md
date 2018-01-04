@@ -6,12 +6,10 @@ the **page** level (which we will be calling a `surface`).
 
 [Demo](http://rawgit.com/gadfly361/re-surface/master/demo/index.html)
 
-[Source](https://github.com/gadfly361/re-surface/tree/master/src/demo/re_surface)
-
 To use re-surface, add the following to the `:dependencies` vector in your project.clj file:
 
 ```clojure
-[re-surface "0.1.0"]
+[re-surface "0.2.0-alpha1"]
 ```
 
 **Note: This is very much a work in progress and subject to sweeping changes.**
@@ -123,11 +121,13 @@ A surface-registry is a hash-map.
 | key          | type               | default     | required? |
 |--------------|--------------------|-------------|-----------|
 | :background-color | string        | "white"     | no        |
-| :fixed?      | boolean            | false       | no        |
-| :height      | int                |             | **yes**   |
+| :fixed?      | boolean            | false       | no (2)    |
+| :height      | int                |             | no (2)    |
 | :key         | keyword            |             | **yes**   |
 
 - `:key` is used to lookup a component from the component-registry
+
+(2) If you use `fixed?`, then you must use `height`.
 
 ### :header-dropdown / :navbar-dropdown
 
@@ -138,15 +138,17 @@ A surface-registry is a hash-map.
 | :active?     | boolean            | false       | no        |
 | :background-color | string        | "white"     | no        |
 | :bottom      | int                |             | no        |
-| :full-width? | int                | false       | no (2)    |
-| :height      | int                |             | no (2)    |
-| :key         | keyword            |             | **yes**   |
+| :full-width? | int                | false       | no (3)    |
+| :height      | int                |             | no        |
+| :key         | keyword            |             | no        |
 | :left        | int                |             | no        |
 | :right       | int                |             | no        |
 | :top         | int                |             | no        |
-| :width       | int                |             | no  (2)   |
+| :width       | int                |             | no (3)    |
 
-(2) If you use `full-width?`, then you must use `height` and `width` will be ignored.
+- If the `header` and `navbar` have height's then their respective dropowns will start where they are. However, if `header` and `navbar` don't have heights, then you'll need to make up for it using `:top`.
+
+(3) If you use `full-width?`, then `width` will be ignored.
 
 ### :body
 
@@ -165,6 +167,10 @@ A surface-registry is a hash-map.
 | key          | type               | default     | required? |
 |--------------|--------------------|-------------|-----------|
 | :key         | keyword            |             | **yes**   |
+
+If a dimmer is defined for a given surface, it will show if any of the
+following are active: header-dropdown, navbar-dropdown, sidebar-left,
+sidebar-right, modal, modal-fullscreen.
 
 ### :sidebar-left / :sidebar-right
 
@@ -188,7 +194,7 @@ A surface-registry is a hash-map.
 | :active?     | boolean            | false       | no         |
 | :background-color | string        | "white"     | no         |
 | :height      | int                |             | no         |
-| :key         | keyword            |             | **yes**    |
+| :key         | keyword            |             | no         |
 | :width       | int                |             | **yes**    |
 
 ### :modal-fullscreen
@@ -199,7 +205,7 @@ A surface-registry is a hash-map.
 |--------------|--------------------|-------------|------------|
 | :active?     | boolean            | false       | no         |
 | :background-color | string        | "white"     | no         |
-| :key         | keyword            |             | **yes**    |
+| :key         | keyword            |             | no         |
 
 
 ## surface-config

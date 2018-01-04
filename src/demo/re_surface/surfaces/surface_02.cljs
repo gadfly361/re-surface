@@ -20,5 +20,6 @@
 
 (def surfaces
   {:surface-02 {:header {:key    :default
-                         :height 100}
+                         :height 100
+                         }
                 :body   {:key :surface-02-body}}})

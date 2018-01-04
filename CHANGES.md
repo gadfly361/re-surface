@@ -1,5 +1,16 @@
 # Changes
 
+## 0.2.0-alpha1 (2018-01-08)
+
+[source](https://github.com/gadfly361/re-surface/tree/v0.1.1)
+
+- don't require height on header, navbar, and footer
+- dont' require key on header-dropdown, navbar-dropdown, modal, and modal-fullscreen
+  - rationale: if you want to use multiple dropdowns or modals on a page, then removing the key requirement makes this process easier
+- remove transition on the way out for header-dropdown, navbar-dropdown, modal, and modal-fullscreen
+- add `default-comp` to header-dropdown, navbar-dropdown, modal and modal-fullscreen
+- add mostly transparent dimmer option to header-dropdown and navbar-dropdown
+
 ## 0.1.0 (2017-12-12)
 
 [source](https://github.com/gadfly361/re-surface/tree/v0.1.0)

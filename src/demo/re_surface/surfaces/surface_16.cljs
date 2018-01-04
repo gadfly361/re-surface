@@ -123,11 +123,10 @@
 
 
 (def surface-init
-  {:header           {:key    :surface-16-header
+  {:header           {:key :surface-16-header
                       :height 100
                       :fixed? true}
-   :header-dropdown {:key :surface-16-header-dropdown
-                     :active? false
+   :header-dropdown {:active? false
                      :top -24}
    :navbar           {:key    :default
                       :height 80
@@ -143,13 +142,10 @@
                       :width   200
                       :active? false}
    :dimmer           {:key :surface-16-dimmer}
-   :modal            {:key     :surface-16-modal
-                      :active? false
+   :modal            {:active? false
                       :width   300
                       :height  500}
-   :modal-fullscreen {:key        :surface-16-modal-fs
-                      :active?    false
-                      }})
+   :modal-fullscreen {:active? false}})
 
 (def surfaces
   {:surface-16 surface-init
@@ -162,21 +158,27 @@
    :surface-16-sra (-> surface-init
                        (assoc-in [:sidebar-right :active?] true))
 
-
    :surface-16-modal (-> surface-init
+                         (assoc-in [:modal :key] :surface-16-modal)
                          (assoc-in [:modal :active?] true))
 
    ;; fs --> fullscreen
    :surface-16-modal-fs (-> surface-init
+                            (assoc-in [:modal-fullscreen :key]
+                                      :surface-16-modal-fs)
                             (assoc-in [:modal-fullscreen :active?] true))
 
    :surface-16-modal-fs-with-modal-on-top
    (-> surface-init
+       (assoc-in [:modal-fullscreen :key]
+                 :surface-16-modal-fs)
        (assoc-in [:modal-fullscreen :active?] true)
        (assoc-in [:dimmer :key] :surface-16-dimmer-with-modal-on-top)
+       (assoc-in [:modal :key] :surface-16-modal)
        (assoc-in [:modal :active?] true))
 
    :surface-16-header-dropdown
    (-> surface-init
+       (assoc-in [:header-dropdown :key] :surface-16-header-dropdown)
        (assoc-in [:header-dropdown :active?] true))
    })
