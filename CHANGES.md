@@ -2,7 +2,7 @@
 
 ## 0.2.0-alpha1 (2018-01-08)
 
-[source](https://github.com/gadfly361/re-surface/tree/v0.1.1)
+[source](https://github.com/gadfly361/re-surface/tree/v0.2.0-alpha1)
 
 - don't require height on header, navbar, and footer
 - dont' require key on header-dropdown, navbar-dropdown, modal, and modal-fullscreen
