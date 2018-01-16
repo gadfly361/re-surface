@@ -58,6 +58,7 @@
    :sidebar-left {:key     :default
                   :width   200
                   :active? false}
+   :dimmer        {:key :surface-12-dimmer}
    })
 
 (def surfaces
