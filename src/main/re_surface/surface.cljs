@@ -1,6 +1,6 @@
 (ns re-surface.surface
   (:require
-   [cljs.spec :as spec]
+   [cljs.spec.alpha :as spec]
    [clojure.string :as string]
    [re-surface.style :as style]
    [re-surface.z-index :as z-index]))

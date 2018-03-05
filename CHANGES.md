@@ -1,5 +1,13 @@
 # Changes
 
+## 0.2.0-alpha2 (2018-03-05)
+
+[source](https://github.com/gadfly361/re-surface/tree/v0.2.0-alpha2)
+
+- bump version of clojurescript
+- use `clojure.spec.alpha` instead of `clojure.spec`
+  - this alpha version is same as previous, just supports newer versions of clojurescript
+
 ## 0.2.0-alpha1 (2018-01-08)
 
 [source](https://github.com/gadfly361/re-surface/tree/v0.2.0-alpha1)

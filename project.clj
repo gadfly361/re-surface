@@ -1,4 +1,4 @@
-(defproject re-surface "0.2.0-alpha1"
+(defproject re-surface "0.2.0-alpha2"
   :description "This library is an attempt to provide structure to a reagent application at the page level."
   :url "https://github.com/gadfly361/re-surface"
   :license {:name "MIT"}
@@ -6,7 +6,7 @@
         :url  "https://github.com/gadfly361/re-surface"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.229"]
+                 [org.clojure/clojurescript "1.9.908"]
                  [garden "1.3.2"]]
 
   :min-lein-version "2.5.3"
