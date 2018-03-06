@@ -9,7 +9,7 @@ the **page** level (which we will be calling a `surface`).
 To use re-surface, add the following to the `:dependencies` vector in your project.clj file:
 
 ```clojure
-[re-surface "0.2.0-alpha1"]
+[re-surface "0.2.0-alpha2"]
 ```
 
 **Note: This is very much a work in progress and subject to sweeping changes.**
